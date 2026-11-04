@@ -444,7 +444,8 @@ it("public CLI uses only GET and produces a report from fixture GitHub responses
   const report = JSON.parse(
     await readFile(join(outputDirectory, "report.json"), "utf8"),
   );
-  expect(report.pullRequests[0].ci.category).toBe("missing");
+  expect(report.pullRequests).toHaveLength(1);
+  expect(report.pullRequests[0]?.ci.category).toBe("missing");
   await expect(
     readFile(join(outputDirectory, "summary.md"), "utf8"),
   ).resolves.toContain("missing");
